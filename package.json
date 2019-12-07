@@ -1,0 +1,19 @@
+{
+  "name": "jssc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "www": "node bin/www",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "open": "^7.0.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
