@@ -1,8 +1,11 @@
 {
   "name": "jssc",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "license": "MIT",
+  "bin": {
+    "www": "www.js"
+  },
   "scripts": {
     "www": "node bin/www",
     "build": "webpack"
@@ -15,5 +18,15 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CNWHZQ/jssc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CNWHZQ/jssc/issues"
+  },
+  "homepage": "https://github.com/CNWHZQ/jssc#readme"
 }
