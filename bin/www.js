@@ -8,7 +8,7 @@ app.use("/dist",express.static(path.resolve("dist")));
 app.listen(port,function(){
     console.log("[server] listeing on "+port)
     open(
-        'http://127.0.0.1:'+port, 
+        'http://127.0.0.1:'+port+"/public/index.html", 
         {app: ['chrome', '--incognito']}
     );
 });
