@@ -34,6 +34,8 @@ type ajaxOption = {
 type ServiceOption = {
     props?:PropsOption
     ajax?:ajaxOption
+    usemock?:boolean
+    mock?:Function
     url?:string
     then?:{(...args:any[]):any}
     catch?:{(...args:any[]):any}
@@ -117,7 +119,14 @@ export class ServiceCreater{
                 }
                 rev = Promise.resolve(d)
             }
-            if(isString(opt.url)){
+            if(opt.usemock){
+                if(opt.mock && isFunction(opt.mock)){
+                    let mockfn = opt.mock;
+                    rev = rev.then(
+                        (postData:{data?:any}):Promise<any>=>Promise.resolve((postData&&postData.data)?mockfn.call(salf,postData.data):mockfn.call(salf))
+                    )
+                }
+            } else if(isString(opt.url)){
                 let url = opt.url;
                 rev = rev.then(
                     (postData:{data?:any}):Promise<any> => salf.ajax(url,Object.assign({},salf.ajaxOption,opt.ajax,postData))
