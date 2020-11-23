@@ -39,6 +39,18 @@ type ServiceOption = {
     url?:string
     then?:{(...args:any[]):any}
     catch?:{(...args:any[]):any}
+    [key:string]:any
+}
+//
+const noAjaxOption = ["props","ajax","usemock","mock","then","catch"]
+const getAjaxOptionFromOption = function(option:ServiceOption):ajaxOption{
+    let rev:ajaxOption = {};
+    for(let att in option){
+        if(noAjaxOption.indexOf(att)<0){
+            rev[att]=option[att]
+        }
+    }
+    return rev;
 }
 
 const getProps = async function(props:PropsOption|undefined,args:any[],context:any){
@@ -129,7 +141,8 @@ export class ServiceCreater{
             } else if(isString(opt.url)){
                 let url = opt.url;
                 rev = rev.then(
-                    (postData:{data?:any}):Promise<any> => salf.ajax(url,Object.assign({},salf.ajaxOption,opt.ajax,postData))
+                    (postData:{data?:any}):Promise<any> => 
+                    salf.ajax(url,Object.assign({},salf.ajaxOption,opt.ajax,getAjaxOptionFromOption(opt),postData))
                 )
             }
             if(opt.then){
@@ -152,6 +165,6 @@ export class ServiceCreater{
 
     public setAjaxOption(ajaxOption:ajaxOption){
         Object.assign(this.ajaxOption,ajaxOption)
-    }
+    } 
 
 }
